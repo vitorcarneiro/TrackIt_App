@@ -1,30 +1,50 @@
 import axios from "axios";
 
-const BASE_URL = "https://mock-api.driven.com.br/api/v4/cineflex";
+const BASE_URL = "https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit";
 
-function getMovies() {
+function login() {
   const promise = axios.get(`${BASE_URL}/movies`);
   return promise;
 }
 
-function getShowtimes(movieId) {
-  const promise = axios.get(`${BASE_URL}/movies/${movieId}/showtimes`);
+function signUp(clientData) {
+  const promise = axios.post(`${BASE_URL}/auth/sign-up`, clientData);
   return promise;
 }
 
-function getSeats(showtimeId) {
-  const promise = axios.get(`${BASE_URL}/showtimes/${showtimeId}/seats`);
-  return promise;
-}
+// function createHabit(showtimeId) {
+//   const promise = axios.get(`${BASE_URL}/showtimes/${showtimeId}/seats`);
+//   return promise;
+// }
 
-function createBooking(booking) {
-  const promise = axios.post(`${BASE_URL}/seats/book-many`, booking);
-  return promise;
-}
+// function getHabits(booking) {
+//   const promise = axios.post(`${BASE_URL}/seats/book-many`, booking);
+//   return promise;
+// }
 
-export {
-  getMovies,
-  getShowtimes,
-  getSeats,
-  createBooking
-}
+// function deleteSingleHabit(booking) {
+//   const promise = axios.post(`${BASE_URL}/seats/book-many`, booking);
+//   return promise;
+// }
+
+// function habitsToday(booking) {
+//   const promise = axios.get(`${BASE_URL}/seats/book-many`, booking);
+//   return promise;
+// }
+
+// function habitDone(booking) {
+//   const promise = axios.post(`${BASE_URL}/seats/book-many`, booking);
+//   return promise;
+// }
+
+// function habitsHistory(booking) {
+//   const promise = axios.get(`${BASE_URL}/seats/book-many`, booking);
+//   return promise;
+// }
+
+const functionsAPI = {
+  login,
+  signUp
+};
+
+export default functionsAPI;

@@ -1,13 +1,45 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 import styled from 'styled-components';
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
-import bigLogo from '../assets/trackIt_BigLogo.png'
+import bigLogo from '../assets/trackIt_BigLogo.png';
+
+import signUp from '../services/API.js';
 
 export default function SignupPage() {
 
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const [name, setName] = useState('');
+    const [picLink, setPicLinc] = useState('');
     
+    const navigate = useNavigate();
+
+    function submitClientData(event) {
+        event.preventDefault();
+
+        alert("Mensagem enviada com sucesso!");
+        
+        const clientData = {
+            email: email,
+            name: name,
+            image: picLink,
+            password: password
+        }
+
+        const promise = signUp(clientData);
+
+        promise.then(() => {
+            console.log(promise);
+            navigate('/');
+          });
+        
+        promise.catch(() => {
+            console.log(promise);
+            alert('ERROR');
+          });
+    }
 
     return (
         <Container>
@@ -15,38 +47,46 @@ export default function SignupPage() {
                 <img src={bigLogo} alt="bigLogo"/>
             </BigLogo>
 
-            <LoginForm onSubmit={console.log("submitted")}>
+            <LoginForm onSubmit={submitClientData}>
                 <Input type="email"
                     id="email"
                     placeholder="email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
                     required
                 />
 
                 <Input type="password"
-                    id="password"
+                    value={password}
                     placeholder="senha"
+                    id="password"
+                    onChange={(e) => setPassword(e.target.value)}
                     required
                 />
 
                 <Input type="text"
                     id="name"
                     placeholder="nome"
+                    value={name}
+                    onChange={(e) => setName(e.target.value)}
                     required
                 />
 
                 <Input type="text"
                     id="foto"
                     placeholder="foto"
+                    value={picLink}
+                    onChange={(e) => setPicLinc(e.target.value)}
                     required
                 />
 
-                <Button>
+                <Button type="submit">
                     Cadastrar
                 </Button>
             </LoginForm>
 
-            <Link to={`/cadastro`}>
-                <p>Não tem uma conta? Cadastre-se</p>
+            <Link to={`/`}>
+                <p>Já tem uma conta? Faça login!</p>
             </Link>
 
         </Container>

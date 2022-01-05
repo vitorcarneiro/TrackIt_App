@@ -28,7 +28,7 @@ export default function LoginPage() {
                     required
                 />
 
-                <Button>
+                <Button type="submit">
                     Entrar
                 </Button>
             </LoginForm>
