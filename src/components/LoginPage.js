@@ -7,8 +7,6 @@ import bigLogo from '../assets/trackIt_BigLogo.png'
 
 export default function LoginPage() {
 
-    
-
     return (
         <Container>
             <BigLogo>

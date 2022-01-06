@@ -1,11 +1,11 @@
-import { useState, useEffect } from "react";
-import axios from "axios";
+import { useState } from "react";
 import styled from 'styled-components';
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
+import { useNavigate } from "react-router";
 
 import bigLogo from '../assets/trackIt_BigLogo.png';
 
-import signUp from '../services/API.js';
+import { signUp } from '../services/API.js';
 
 export default function SignupPage() {
 
@@ -13,14 +13,36 @@ export default function SignupPage() {
     const [password, setPassword] = useState('');
     const [name, setName] = useState('');
     const [picLink, setPicLinc] = useState('');
-    
+
     const navigate = useNavigate();
+
+    function validateClientData(email, password, name, picLink) {
+        const errorsInfo = [];
+
+        if (email.length === 0) errorsInfo.push("Preencha o campo email!");
+        if (password.length === 0) errorsInfo.push("Preencha o campo mensagem!");
+        
+        function validateEmail(email) {
+            return String(email).toLowerCase().match(
+                /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+                );
+        };
+
+        function checkURL(url) {
+            return(url.match(/\.(jpeg|jpg|gif|png)$/) != null);
+        }
+            
+            if(!validateEmail(email)) errorsInfo.push("Verfifique o campo email!");
+            if(password.length < 4) errorsInfo.push(" Digite uma senha com mais de 4 caracteres!");
+            if (name.length === 0) errorsInfo.push(" Preencha o campo nome!");
+            if(!checkURL(picLink)) errorsInfo.push(" Verfifique o campo foto!");;
+
+        return errorsInfo;
+    };
 
     function submitClientData(event) {
         event.preventDefault();
 
-        alert("Mensagem enviada com sucesso!");
-        
         const clientData = {
             email: email,
             name: name,
@@ -31,14 +53,12 @@ export default function SignupPage() {
         const promise = signUp(clientData);
 
         promise.then(() => {
-            console.log(promise);
             navigate('/');
-          });
+        });
         
         promise.catch(() => {
-            console.log(promise);
-            alert('ERROR');
-          });
+            alert(validateClientData(email, password, name, picLink));
+        });
     }
 
     return (
