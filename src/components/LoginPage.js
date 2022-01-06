@@ -1,11 +1,49 @@
 import { useState, useEffect } from "react";
-import axios from "axios";
 import styled from 'styled-components';
 import { Link } from "react-router-dom";
+import Loader from "react-loader-spinner";
 
-import bigLogo from '../assets/trackIt_BigLogo.png'
+import bigLogo from '../assets/trackIt_BigLogo.png';
+
+import { login } from '../services/API.js';
 
 export default function LoginPage() {
+
+    const [isLoading, setIsLoading] = useState(false);
+
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+
+    function handleLogin(event) {
+        event.preventDefault();
+
+        const clientLogin = {
+            email: email,
+            password: password
+        }
+
+        setIsLoading(true);
+        
+        const promise = login(clientLogin);
+
+        promise.then((info) => {
+            console.log(info);
+
+            setIsLoading(false); //remove
+        });
+        
+        promise.catch((error) => {
+            console.log(error.response);
+            alert(`STATUS: ${error.response.status}
+            
+                ${error.response.data.message}
+                ${(error.response.data.details) ? error.response.data.details : ""}
+            `);
+
+            setIsLoading(false);
+        });
+
+    }
 
     return (
         <Container>
@@ -13,21 +51,31 @@ export default function LoginPage() {
                 <img src={bigLogo} alt="bigLogo"/>
             </BigLogo>
 
-            <LoginForm onSubmit={console.log("submitted")}>
+            <LoginForm onSubmit={handleLogin}>
                 <Input type="email"
                     id="email"
                     placeholder="email"
+                    isLoading={isLoading}
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
                     required
                 />
 
                 <Input type="password"
                     id="password"
                     placeholder="senha"
+                    isLoading={isLoading}
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
                     required
                 />
 
-                <Button type="submit">
-                    Entrar
+                <Button type="submit" isLoading={isLoading}>
+                    {isLoading ? (
+                        <Loader type="ThreeDots" color="#FFF" height={13} width={51} />
+                    ) : (
+                        "Entrar"
+                    )}
                 </Button>
             </LoginForm>
 
@@ -123,6 +171,15 @@ const Input = styled.input`
     ::placeholder {
         color: #D5D5D5;
     }
+
+    ${({ isLoading }) =>
+        (isLoading && `
+            background: #F2F2F2;
+            color: #AFAFAF;
+            opacity: 0.7;
+            pointer-events: none;
+        `)
+    };
 `;
 
 const Button = styled.button`
@@ -143,4 +200,11 @@ const Button = styled.button`
     color: #FFFFFF;
 
     cursor: pointer;
+
+    ${({ isLoading }) =>
+        (isLoading && `
+            opacity: 0.7;
+            pointer-events: none;
+        `)
+    };
 `;

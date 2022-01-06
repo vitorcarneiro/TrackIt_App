@@ -42,8 +42,9 @@ export default function SignupPage() {
             alert(`STATUS: ${error.response.status}
             
                 ${error.response.data.message}
-                ${error.response.data.details}
+                ${(error.response.data.details) ? error.response.data.details : ""}
             `);
+
             setIsLoading(false);
         });
     }
