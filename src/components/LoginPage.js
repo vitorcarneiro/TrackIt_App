@@ -1,11 +1,13 @@
-import { useState, useEffect } from "react";
+import { useState, useContext } from "react";
 import styled from 'styled-components';
 import { Link } from "react-router-dom";
+import { useNavigate } from "react-router";
 import Loader from "react-loader-spinner";
 
-import bigLogo from '../assets/trackIt_BigLogo.png';
-
 import { login } from '../services/API.js';
+import UserContext from "../contexts/UserContext";
+
+import bigLogo from '../assets/trackIt_BigLogo.png';
 
 export default function LoginPage() {
 
@@ -13,6 +15,10 @@ export default function LoginPage() {
 
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+
+    const navigate = useNavigate();
+
+    const { setUser } = useContext(UserContext);
 
     function handleLogin(event) {
         event.preventDefault();
@@ -26,9 +32,12 @@ export default function LoginPage() {
         
         const promise = login(clientLogin);
 
-        promise.then((info) => {
-            console.log(info);
+        promise.then((clientData) => {
+            console.log(clientData);
 
+            setUser(clientData);
+
+            navigate('/hoje');
             setIsLoading(false); //remove
         });
         
