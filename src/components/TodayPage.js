@@ -1,10 +1,12 @@
 import React from 'react';
 import styled from 'styled-components';
 
+import NavBar from './NavBar.js'
+
 export default function TodayPage() {
     return (
         <Container>
-            
+            <NavBar />
         </Container>
     );
 }

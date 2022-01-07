@@ -33,12 +33,10 @@ export default function LoginPage() {
         const promise = login(clientLogin);
 
         promise.then((clientData) => {
-            console.log(clientData);
-
-            setUser(clientData);
+            console.log(clientData.data);
+            setUser(clientData.data);
 
             navigate('/hoje');
-            setIsLoading(false); //remove
         });
         
         promise.catch((error) => {
