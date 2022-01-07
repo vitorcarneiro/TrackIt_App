@@ -1,12 +1,14 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import NavBar from './NavBar.js'
+import HeaderBar from './HeaderBar.js'
+import FooterBar from './FooterBar.js';
 
 export default function TodayPage() {
     return (
         <Container>
-            <NavBar />
+            <HeaderBar />
+            <FooterBar />
         </Container>
     );
 }

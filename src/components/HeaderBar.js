@@ -3,9 +3,7 @@ import styled from 'styled-components';
 
 import UserContext from "../contexts/UserContext";
 
-
-
-export default function NavBar() {
+export default function HeaderBar() {
     
     const { user } = useContext(UserContext);
     console.log(user.image);
