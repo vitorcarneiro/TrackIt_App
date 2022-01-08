@@ -181,7 +181,7 @@ const Input = styled.input`
     }
     ::-moz-placeholder {
         color: #D5D5D5;
-    opacity:  1;
+        opacity:  1;
     }
     :-ms-input-placeholder {
         color: #D5D5D5;

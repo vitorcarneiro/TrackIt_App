@@ -12,13 +12,19 @@ function signUp(clientData) {
   return promise;
 };
 
-// function createHabit(showtimeId) {
-//   const promise = axios.get(`${BASE_URL}/showtimes/${showtimeId}/seats`);
-//   return promise;
-// }
-
 function getTodayHabits(user) {
   const promise = axios.get(`${BASE_URL}/habits/today`,
+    {
+      headers: {
+        Authorization: `Bearer ${user.token}`
+      }
+    }
+  );
+  return promise;
+}
+
+function getAllHabits(user) {
+  const promise = axios.get(`${BASE_URL}/habits`,
     {
       headers: {
         Authorization: `Bearer ${user.token}`
@@ -52,6 +58,20 @@ function uncheckHabit(token, task) {
   return promise;
 }
 
+function createHabit(token, habit) {
+  const promise = axios.post(`${BASE_URL}/habits`,
+  habit,
+    {
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    }
+  );
+  return promise;
+}
+
+
+
 // function habitsToday(booking) {
 //   const promise = axios.get(`${BASE_URL}/seats/book-many`, booking);
 //   return promise;
@@ -71,6 +91,8 @@ export {
   login,
   signUp,
   getTodayHabits,
+  getAllHabits,
   checkHabit,
-  uncheckHabit
+  uncheckHabit,
+  createHabit
 };

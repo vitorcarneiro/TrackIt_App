@@ -73,7 +73,7 @@ export default function TodayPage() {
                     : 
                     todayTasks.map((task) => {
                         return (
-                            <Habit onClick={() => toggleCheck(task)}>
+                            <Task onClick={() => toggleCheck(task)}>
                                 <div>
                                     <h1>{task.name}</h1>
                                     <h2>Sequência atual: {task.currentSequence} {task.currentSequence > 1 ? 'dias' : 'dia'}</h2>
@@ -85,7 +85,7 @@ export default function TodayPage() {
                                     height="69px"
                                     width="69px"
                                     />
-                            </Habit>
+                            </Task>
                         );
                     })
                 }
@@ -160,7 +160,7 @@ const DateAndHabitsPercentage = styled.div`
 
 `;
 
-const Habit = styled.div`
+const Task = styled.div`
     box-sizing: border-box;
 
     width: 100%;
