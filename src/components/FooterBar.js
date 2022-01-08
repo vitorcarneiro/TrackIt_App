@@ -14,27 +14,29 @@ export default function FooterBar() {
 
     return (
         <Footer>
-            <Link to={`/`}>
+            <Link to={`/habitos`}>
                 Hábitos
             </Link>
 
             <ProgressCircle>
-                <CircularProgressbar
-                    value={percentage}
-                    text={`Hoje`}
-                    background
-                    backgroundPadding={6}
-                    styles={buildStyles({
-                      backgroundColor: "#52B6FF",
-                      textColor: "#FFF",
-                      pathColor: "#FFF",
-                      trailColor: "transparent",
-                      fontSize: "18px",
-                    })} 
-                />
+                <Link to={`/hoje`}>
+                    <CircularProgressbar
+                        value={percentage}
+                        text={`Hoje`}
+                        background
+                        backgroundPadding={6}
+                        styles={buildStyles({
+                            backgroundColor: "#52B6FF",
+                            textColor: "#FFF",
+                            pathColor: "#FFF",
+                            trailColor: "transparent",
+                            fontSize: "18px",
+                        })} 
+                        />
+                </Link>
             </ProgressCircle>
 
-            <Link to={`/`}>
+            <Link to={`/historico`}>
                 Histórico
             </Link>
         </Footer>
@@ -49,7 +51,7 @@ const Footer = styled.footer`
     bottom: 0;
     left: 0;
 
-    width: 100vw;
+    width: 100%;
     height: 70px;
 
     background-color: #FFF;

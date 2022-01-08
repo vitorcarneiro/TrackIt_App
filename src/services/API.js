@@ -17,15 +17,40 @@ function signUp(clientData) {
 //   return promise;
 // }
 
-// function getHabits(booking) {
-//   const promise = axios.post(`${BASE_URL}/seats/book-many`, booking);
-//   return promise;
-// }
+function getTodayHabits(user) {
+  const promise = axios.get(`${BASE_URL}/habits/today`,
+    {
+      headers: {
+        Authorization: `Bearer ${user.token}`
+      }
+    }
+  );
+  return promise;
+}
 
-// function deleteSingleHabit(booking) {
-//   const promise = axios.post(`${BASE_URL}/seats/book-many`, booking);
-//   return promise;
-// }
+function checkHabit(token, task) {
+  const promise = axios.post(`${BASE_URL}/habits/${task.id}/check`,
+    task,
+    {
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    }
+  );
+  return promise;
+}
+
+function uncheckHabit(token, task) {
+  const promise = axios.post(`${BASE_URL}/habits/${task.id}/uncheck`,
+  task,
+    {
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    }
+  );
+  return promise;
+}
 
 // function habitsToday(booking) {
 //   const promise = axios.get(`${BASE_URL}/seats/book-many`, booking);
@@ -44,5 +69,8 @@ function signUp(clientData) {
 
 export {
   login,
-  signUp
+  signUp,
+  getTodayHabits,
+  checkHabit,
+  uncheckHabit
 };
