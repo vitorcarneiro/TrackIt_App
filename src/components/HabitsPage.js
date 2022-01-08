@@ -1,10 +1,9 @@
 import { useState, useEffect, useContext } from "react";
 import styled from 'styled-components';
-import dayjs from "dayjs";
 import { TrashOutline } from 'react-ionicons';
 import Loader from "react-loader-spinner";
 
-import { createHabit, getAllHabits } from '../services/API.js';
+import { createHabit, getAllHabits, deleteHabit } from '../services/API.js';
 import UserContext from "../contexts/UserContext";
 
 import HeaderBar from './HeaderBar.js';
@@ -12,19 +11,22 @@ import FooterBar from './FooterBar.js';
 
 export default function HabitPage() {
 
-    const { user, setUser } = useContext(UserContext);
+    const { user } = useContext(UserContext);
 
     const [allHabits, setAllHabits] = useState(null);
-
 
     const [isLoading, setIsLoading] = useState(false);
     const [isCreatingTask, setIsCreatingTask] = useState(false);
     const [newHabitName, setNewHabitName] = useState('');
+    const [numberNewHabits, setNumberNewHabits] = useState(0);
+    const [numberDeletedHabits, setNumberDeletedHabits] = useState(0);
 
     let newHabitWeekdays = [];
 
     useEffect(() => {
         const promise = getAllHabits(user);
+
+        console.log(user);
 
         promise.then((allHabits) => {
             console.log(allHabits.data);
@@ -33,8 +35,13 @@ export default function HabitPage() {
 
         promise.catch((error) => {
             console.log(error);
+            alert(`STATUS: ${error.response.status}
+            
+                ${error.response.data.message}
+                ${(error.response.data.details) ? error.response.data.details : ""}
+            `);
         });
-    }, [user]);
+    }, [user, numberNewHabits, numberDeletedHabits]);
 
     function handleHabitsDay(weekdayNumber) {
         if (!newHabitWeekdays.includes(weekdayNumber)) {
@@ -52,27 +59,58 @@ export default function HabitPage() {
 
     function handleCreateHabit(event) {
         event.preventDefault();
-
+        setIsLoading(true);
+        
         const clientHabit = {
             name: newHabitName,
             days: newHabitWeekdays
         }
-
-        setIsLoading(true);
         
         const promise = createHabit(user.token, clientHabit);
 
         promise.then((habitInfo) => {
             console.log(habitInfo.data);
+            setNumberNewHabits(numberNewHabits + 1);
+            setNewHabitName('');
+            setIsCreatingTask(false);
             setIsLoading(false);
         });
         
         promise.catch((error) => {
-            console.log(error.response);
+            console.log(error.response);  
+            alert(`STATUS: ${error.response.status}
             
+                ${error.response.data.message}
+                ${(error.response.data.details) ? error.response.data.details : ""}
+            `);         
             setIsLoading(false);
         });
+    }
 
+    function handleDeleteHabit(id) {
+        if (window.confirm('Você realmente deseja apagar este hábito?')) {
+            setIsLoading(true);
+            
+            const promise = deleteHabit(user.token, id);
+            
+            promise.then((deleteInfo) => {
+                console.log(deleteInfo);
+                setNumberDeletedHabits(numberDeletedHabits + 1);
+                setIsLoading(false);
+            });
+            
+            promise.catch((error) => {
+                console.log(error.response);
+                alert(`STATUS: ${error.response.status}
+                
+                ${error.response.data.message}
+                ${(error.response.data.details) ? error.response.data.details : ""}
+                `);
+                setIsLoading(false);
+            });
+        } else {
+            return;
+        }
     }
 
     return (
@@ -81,7 +119,7 @@ export default function HabitPage() {
             <Container>
                 <MyHabitsTitle>
                     <h1>Meus hábitos</h1>
-                    <AddButton onClick={() => setIsCreatingTask(true)}>+</AddButton>
+                    <AddButton isLoading={isLoading} onClick={() => setIsCreatingTask(true)}>+</AddButton>
                 </MyHabitsTitle>
 
                 {isCreatingTask &&
@@ -91,6 +129,7 @@ export default function HabitPage() {
                             placeholder="nome do hábito"
                             value={newHabitName}
                             onChange={(e) => setNewHabitName(e.target.value)}
+                            isLoading={isLoading}
                             required
                         />
                         
@@ -99,6 +138,7 @@ export default function HabitPage() {
                                 id="weekday-sun"
                                 className="weekday"
                                 onClick={() => handleHabitsDay(1)}
+                                isLoading={isLoading}
                             />
                             <label for="weekday-sun">D</label>
                             
@@ -106,6 +146,7 @@ export default function HabitPage() {
                                 id="weekday-mon"
                                 className="weekday"
                                 onClick={() => handleHabitsDay(2)}
+                                isLoading={isLoading}
                             />
                             <label for="weekday-mon">S</label>
                             
@@ -113,6 +154,7 @@ export default function HabitPage() {
                                 id="weekday-tue"
                                 className="weekday"
                                 onClick={() => handleHabitsDay(3)}
+                                isLoading={isLoading}
                             />
                             <label for="weekday-tue">T</label>
                             
@@ -120,6 +162,7 @@ export default function HabitPage() {
                                 id="weekday-wed"
                                 className="weekday"
                                 onClick={() => handleHabitsDay(4)}
+                                isLoading={isLoading}
                             />
                             <label for="weekday-wed">Q</label>
                             
@@ -127,6 +170,7 @@ export default function HabitPage() {
                                 id="weekday-thu"
                                 className="weekday"
                                 onClick={() => handleHabitsDay(5)}
+                                isLoading={isLoading}
                             />
                             <label for="weekday-thu">Q</label>
                             
@@ -134,6 +178,7 @@ export default function HabitPage() {
                                 id="weekday-fri"
                                 className="weekday"
                                 onClick={() => handleHabitsDay(6)}
+                                isLoading={isLoading}
                             />
                             <label for="weekday-fri">S</label>
                             
@@ -141,11 +186,12 @@ export default function HabitPage() {
                                 id="weekday-sat"
                                 className="weekday"
                                 onClick={() => handleHabitsDay(7)}
+                                isLoading={isLoading}
                             />
                             <label for="weekday-sat">S</label>
                         </WeekdaysSelector>
 
-                        <CancelCreationTask onClick={() => setIsCreatingTask(false)}>
+                        <CancelCreationTask isLoading={isLoading} onClick={() => setIsCreatingTask(false)}>
                             Cancelar
                         </CancelCreationTask>
                         
@@ -159,7 +205,7 @@ export default function HabitPage() {
                     </TaskCreationForm>
                 }
 
-                {allHabits === null ?
+                {allHabits === null || allHabits.length === 0 ?
                 <NoHabitsCreated>
                     Você não tem nenhum hábito cadastrado ainda. Adicione um hábito para começar a trackear!
                 </NoHabitsCreated> 
@@ -168,11 +214,11 @@ export default function HabitPage() {
                 }
 
                 {allHabits === null ? 
-                    <Loader type="ThreeDots" color="#FFF"/>
+                    <Loader type="ThreeDots" color="#FFF" />
                     : 
                     allHabits.map((habit) => {
                         return (
-                            <Habit onClick={() => console.log(habit)}>
+                            <Habit>
                                 <h1>{habit.name}</h1>
 
                                 <CreatedHabitWeekdays>
@@ -204,6 +250,8 @@ export default function HabitPage() {
                                         color={'#666666'} 
                                         height="15px"
                                         width="13px"
+                                        isLoading={isLoading}
+                                        onClick={() => handleDeleteHabit(habit.id)}
                                     />
                                 </RemoveHabit>
                             </Habit>
@@ -226,7 +274,7 @@ const Container = styled.main`
 
     width: 100%;
     min-height: 100%;
-    padding: 100px 18px 115px 18px;
+    padding: 70px 18px 115px 18px;
 
     display: flex;
     flex-direction: column;
@@ -235,20 +283,6 @@ const Container = styled.main`
     gap: 10px;
 
     background-color: #E5E5E5;
-
-    a {
-        margin-top: 25px;
-
-        font-family: Lexend Deca;
-        font-size: 14px;
-        font-style: normal;
-        font-weight: 400;
-        line-height: 17px;
-        letter-spacing: 0em;
-        text-align: center;
-
-        color: #52B6FF;
-    }
 `;
 
 const MyHabitsTitle = styled.div`
@@ -283,6 +317,13 @@ const AddButton = styled.button`
     color: #FFF;
 
     cursor: pointer;
+
+    ${({ isLoading }) =>
+        (isLoading && `
+            opacity: 0.7;
+            pointer-events: none;
+        `)
+    };
 `;
 
 const NoHabitsCreated = styled.div`
@@ -411,6 +452,8 @@ const WeekdaysSelector = styled.div`
 
         ${({ isLoading }) =>
         (isLoading && `
+            background: #F2F2F2;
+            color: #AFAFAF;
             opacity: 0.7;
             pointer-events: none;
         `)
@@ -468,6 +511,13 @@ const CancelCreationTask = styled.p`
     margin: 0 !important;
 
     cursor: pointer;
+
+    ${({ isLoading }) =>
+        (isLoading && `
+            opacity: 0.7;
+            pointer-events: none;
+        `)
+    };
 `;
 
 const Habit = styled.div`
@@ -531,14 +581,21 @@ const CreatedHabitWeekdays = styled.div`
             background: #CFCFCF;
             color: #FFF;
             border: 1px solid #CFCFCF;
-        }
+    }
 `;
 
 const RemoveHabit = styled.div`
     position: absolute;
 
-    top: 11px;
+    top: 15px;
     right: 10px;
 
     cursor: pointer;
+
+    ${({ isLoading }) =>
+        (isLoading && `
+            opacity: 0.7;
+            pointer-events: none;
+        `)
+    };
 `;

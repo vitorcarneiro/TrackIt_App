@@ -70,6 +70,17 @@ function createHabit(token, habit) {
   return promise;
 }
 
+function deleteHabit(token, id) {
+  const promise = axios.delete(`${BASE_URL}/habits/${id}`,
+    {
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    }
+  );
+  return promise;
+}
+
 
 
 // function habitsToday(booking) {
@@ -94,5 +105,6 @@ export {
   getAllHabits,
   checkHabit,
   uncheckHabit,
-  createHabit
+  createHabit,
+  deleteHabit
 };
