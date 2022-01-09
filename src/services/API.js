@@ -12,11 +12,11 @@ function signUp(clientData) {
   return promise;
 };
 
-function getTodayHabits(user) {
+function getTodayHabits(token) {
   const promise = axios.get(`${BASE_URL}/habits/today`,
     {
       headers: {
-        Authorization: `Bearer ${user.token}`
+        Authorization: `Bearer ${token}`
       }
     }
   );

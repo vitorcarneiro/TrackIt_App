@@ -22,9 +22,10 @@ export default function TodayPage() {
     const todayDate = dayjs().locale("pt-br").format("dddd, DD/MM");
 
     useEffect(() => {
-        const promise = getTodayHabits(user);
+        const promise = getTodayHabits(user.token);
 
         promise.then((todayTasks) => {
+            console.log(todayTasks);
             console.log(todayTasks.data);
             console.log(todayTasks.data.length);
             setTodayTasks(todayTasks.data);

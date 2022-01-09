@@ -137,7 +137,7 @@ export default function HabitPage() {
                             <input type="checkbox"
                                 id="weekday-sun"
                                 className="weekday"
-                                onClick={() => handleHabitsDay(1)}
+                                onClick={() => handleHabitsDay(0)}
                                 isLoading={isLoading}
                             />
                             <label for="weekday-sun">D</label>
@@ -145,7 +145,7 @@ export default function HabitPage() {
                             <input type="checkbox"
                                 id="weekday-mon"
                                 className="weekday"
-                                onClick={() => handleHabitsDay(2)}
+                                onClick={() => handleHabitsDay(1)}
                                 isLoading={isLoading}
                             />
                             <label for="weekday-mon">S</label>
@@ -153,7 +153,7 @@ export default function HabitPage() {
                             <input type="checkbox"
                                 id="weekday-tue"
                                 className="weekday"
-                                onClick={() => handleHabitsDay(3)}
+                                onClick={() => handleHabitsDay(2)}
                                 isLoading={isLoading}
                             />
                             <label for="weekday-tue">T</label>
@@ -161,7 +161,7 @@ export default function HabitPage() {
                             <input type="checkbox"
                                 id="weekday-wed"
                                 className="weekday"
-                                onClick={() => handleHabitsDay(4)}
+                                onClick={() => handleHabitsDay(3)}
                                 isLoading={isLoading}
                             />
                             <label for="weekday-wed">Q</label>
@@ -169,7 +169,7 @@ export default function HabitPage() {
                             <input type="checkbox"
                                 id="weekday-thu"
                                 className="weekday"
-                                onClick={() => handleHabitsDay(5)}
+                                onClick={() => handleHabitsDay(4)}
                                 isLoading={isLoading}
                             />
                             <label for="weekday-thu">Q</label>
@@ -177,7 +177,7 @@ export default function HabitPage() {
                             <input type="checkbox"
                                 id="weekday-fri"
                                 className="weekday"
-                                onClick={() => handleHabitsDay(6)}
+                                onClick={() => handleHabitsDay(5)}
                                 isLoading={isLoading}
                             />
                             <label for="weekday-fri">S</label>
@@ -185,7 +185,7 @@ export default function HabitPage() {
                             <input type="checkbox"
                                 id="weekday-sat"
                                 className="weekday"
-                                onClick={() => handleHabitsDay(7)}
+                                onClick={() => handleHabitsDay(6)}
                                 isLoading={isLoading}
                             />
                             <label for="weekday-sat">S</label>
@@ -222,25 +222,25 @@ export default function HabitPage() {
                                 <h1>{habit.name}</h1>
 
                                 <CreatedHabitWeekdays>
-                                    <div className={habit.days.includes(1) && 'checked'}>
+                                    <div className={habit.days.includes(0) && 'checked'}>
                                         D
                                     </div>
-                                    <div className={habit.days.includes(2) && 'checked'}>
+                                    <div className={habit.days.includes(1) && 'checked'}>
                                         S
                                     </div>
-                                    <div className={habit.days.includes(3) && 'checked'}>
+                                    <div className={habit.days.includes(2) && 'checked'}>
                                         T
+                                    </div>
+                                    <div className={habit.days.includes(3) && 'checked'}>
+                                        Q
                                     </div>
                                     <div className={habit.days.includes(4) && 'checked'}>
                                         Q
                                     </div>
                                     <div className={habit.days.includes(5) && 'checked'}>
-                                        Q
-                                    </div>
-                                    <div className={habit.days.includes(6) && 'checked'}>
                                         S
                                     </div>
-                                    <div className={habit.days.includes(7) && 'checked'}>
+                                    <div className={habit.days.includes(6) && 'checked'}>
                                         S
                                     </div>
                                 </CreatedHabitWeekdays>
