@@ -11,9 +11,11 @@ import HabitsPage from './components/HabitsPage.js';
 export default function App() {
 
     const [user, setUser] = useState(null);
+    const [allTodayTasks, setAllTodayTasks] = useState(0);
+    const [tasksDoneToday, setTasksDoneToday] = useState(0);
 
     return (
-        <UserContext.Provider value={{ user, setUser }}>
+        <UserContext.Provider value={{ user, setUser, allTodayTasks, setAllTodayTasks, tasksDoneToday, setTasksDoneToday }}>
             <BrowserRouter>
                     <Routes>
                         <Route path="/" element={ <LoginPage /> }></Route>

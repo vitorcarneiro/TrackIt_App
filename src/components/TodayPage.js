@@ -12,29 +12,33 @@ import FooterBar from './FooterBar.js';
 
 export default function TodayPage() {
 
-    const { user, setUser } = useContext(UserContext);
+    const { user, setUser, allTodayTasks, setAllTodayTasks, tasksDoneToday, setTasksDoneToday } = useContext(UserContext);
 
     const [todayTasks, setTodayTasks] = useState(null);
-    const [habitsChecked, setHabitsChecked] = useState(0);
-    const [percentegeHabitsChecked, setPercentegeHabitsChecked] = useState(0);
     
-
     const todayDate = dayjs().locale("pt-br").format("dddd, DD/MM");
 
     useEffect(() => {
         const promise = getTodayHabits(user.token);
 
-        promise.then((todayTasks) => {
-            console.log(todayTasks);
-            console.log(todayTasks.data);
-            console.log(todayTasks.data.length);
-            setTodayTasks(todayTasks.data);
+        promise.then((todayTasksApi) => {
+            let doneTasks = 0;
+            
+            todayTasksApi.data.forEach(task => {
+                if (task.done) {
+                    doneTasks++;
+                }
+            });
+
+            setTasksDoneToday(doneTasks);
+            setAllTodayTasks(todayTasksApi.data.length)
+            setTodayTasks(todayTasksApi.data);
         });
 
         promise.catch((error) => {
             console.log(error);
         });
-    }, [user, habitsChecked]);
+    }, [user, tasksDoneToday]);
 
     function toggleCheck(task) {
         if(task.done) {
@@ -42,8 +46,7 @@ export default function TodayPage() {
 
             checkPromise.then((reponse) => {
                 console.log(reponse);
-                setHabitsChecked(habitsChecked - 1);
-                setPercentegeHabitsChecked((habitsChecked)/todayTasks.length);
+                setTasksDoneToday(tasksDoneToday - 1);
             });
 
             checkPromise.catch((error) => {
@@ -55,8 +58,7 @@ export default function TodayPage() {
 
             uncheckPromise.then((reponse) => {
                 console.log(reponse);
-                setHabitsChecked(habitsChecked + 1);
-                setPercentegeHabitsChecked((habitsChecked * 100)/todayTasks.length);
+                setTasksDoneToday(tasksDoneToday + 1);
             });
 
             uncheckPromise.catch((error) => {
@@ -71,10 +73,10 @@ export default function TodayPage() {
             <Container>
                 <DateAndHabitsPercentage>
                     <h1>{todayDate}</h1>
-                    { habitsChecked === 0 ? (
+                    { tasksDoneToday === 0 ? (
                         <h2>Nenhum hábito concluído ainda</h2>
                         ) : (
-                        <h2>{percentegeHabitsChecked}% dos hábitos concluídos</h2>
+                        <h2 style={{color: '#8FC549'}}>{Math.round((tasksDoneToday/allTodayTasks) * 100)}% dos hábitos concluídos</h2>
                         )
                     }
                 </DateAndHabitsPercentage>
@@ -87,8 +89,8 @@ export default function TodayPage() {
                             <Task onClick={() => toggleCheck(task)}>
                                 <div>
                                     <h1>{task.name}</h1>
-                                    <h2>Sequência atual: {task.currentSequence} {task.currentSequence > 1 ? 'dias' : 'dia'}</h2>
-                                    <h2>Seu recorde: {task.highestSequence} {task.highestSequence > 1 ? 'dias' : 'dia'}</h2>
+                                    <h2>Sequência atual: <span style={task.done ? {color: '#8FC549'} : {color: '#666666'}}>{task.currentSequence} {task.currentSequence > 1 ? 'dias' : 'dia'}</span></h2>
+                                    <h2>Seu recorde: <span style={task.highestSequence !== 0 && task.currentSequence === task.highestSequence ? {color: '#8FC549'} : {color: '#666666'}}>{task.highestSequence} {task.highestSequence > 1 ? 'dias' : 'dia'}</span></h2>
                                 </div>
 
                                 <Checkbox
@@ -211,7 +213,7 @@ const Task = styled.div`
         letter-spacing: 0em;
         text-align: left;
 
-        color: #BABABA;
+        color: #666666;
         margin: 0;
     }
 `;
