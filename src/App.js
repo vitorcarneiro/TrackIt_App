@@ -7,6 +7,7 @@ import SignupPage from './components/SignupPage.js';
 import LoginPage from './components/LoginPage.js';
 import TodayPage from './components/TodayPage.js';
 import HabitsPage from './components/HabitsPage.js';
+import HistoryPage from './components/HistoryPage.js';
 
 export default function App() {
 
@@ -22,6 +23,7 @@ export default function App() {
                         <Route path="/cadastro" element={ <SignupPage /> }></Route>
                         <Route path="/hoje" element={ <TodayPage /> }></Route>
                         <Route path="/habitos" element={ <HabitsPage /> }></Route>
+                        <Route path="/historico" element={ <HistoryPage /> }></Route>
                     </Routes>
             </BrowserRouter>
         </UserContext.Provider>

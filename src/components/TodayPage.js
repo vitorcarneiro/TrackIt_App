@@ -12,7 +12,7 @@ import FooterBar from './FooterBar.js';
 
 export default function TodayPage() {
 
-    const { user, setUser, allTodayTasks, setAllTodayTasks, tasksDoneToday, setTasksDoneToday } = useContext(UserContext);
+    const { user, allTodayTasks, setAllTodayTasks, tasksDoneToday, setTasksDoneToday } = useContext(UserContext);
 
     const [todayTasks, setTodayTasks] = useState(null);
     
@@ -38,7 +38,7 @@ export default function TodayPage() {
         promise.catch((error) => {
             console.log(error);
         });
-    }, [user, tasksDoneToday]);
+    }, [user, tasksDoneToday, setAllTodayTasks, setTasksDoneToday]);
 
     function toggleCheck(task) {
         if(task.done) {

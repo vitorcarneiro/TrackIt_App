@@ -9,8 +9,8 @@ import UserContext from "../contexts/UserContext";
 
 export default function FooterBar() {
     
-    const { user } = useContext(UserContext);
-    const percentage = 60;
+    const { allTodayTasks,  tasksDoneToday} = useContext(UserContext);
+    const percentage = allTodayTasks === 0 ? 0 : Math.round((tasksDoneToday/allTodayTasks) * 100);
 
     return (
         <Footer>
