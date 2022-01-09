@@ -14,12 +14,12 @@ export default function FooterBar() {
 
     return (
         <Footer>
-            <Link to={`/habitos`}>
+            <StyledLink to={`/habitos`}>
                 Hábitos
-            </Link>
+            </StyledLink>
 
             <ProgressCircle>
-                <Link to={`/hoje`}>
+                <StyledLink to={`/hoje`}>
                     <CircularProgressbar
                         value={percentage}
                         text={`Hoje`}
@@ -33,12 +33,12 @@ export default function FooterBar() {
                             fontSize: "18px",
                         })} 
                         />
-                </Link>
+                </StyledLink>
             </ProgressCircle>
 
-            <Link to={`/historico`}>
+            <StyledLink to={`/historico`}>
                 Histórico
-            </Link>
+            </StyledLink>
         </Footer>
     );
 }
@@ -63,15 +63,6 @@ const Footer = styled.footer`
     align-items: center;
 
     font-family: Lexend Deca !important;
-
-    a {
-        font-size: 18px !important;
-        font-style: normal;
-        font-weight: 400;
-
-        text-decoration: none;
-        margin: 0 !important;
-    }
 `;
 
 const ProgressCircle = styled.div`
@@ -81,3 +72,25 @@ const ProgressCircle = styled.div`
     margin-bottom: 50px;
 `;
 
+const StyledLink = styled(Link)`
+    text-decoration: none;
+
+    &:focus, &:hover, &:visited, &:link, &:active {
+        text-decoration: none;
+    }
+
+    color: #52B6FF;
+    font-size: 18px !important;
+    font-style: normal;
+    font-weight: 400;
+
+    text-decoration: none;
+    margin: 0 !important;
+
+    ${({ isLoading }) =>
+        (isLoading && `
+            opacity: 0.7 !important;
+            pointer-events: none !important;
+        `)
+    };
+`;
