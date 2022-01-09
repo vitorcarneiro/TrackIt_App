@@ -101,10 +101,9 @@ export default function SignupPage() {
                 </Button>
             </LoginForm>
 
-            <Link to={`/`}>
-                <p>Já tem uma conta? Faça login!</p>
-            </Link>
-
+            <StyledLink to={`/`} isLoading={isLoading}>
+                Já tem uma conta? Faça login!
+            </StyledLink>
         </Container>
     );
 }
@@ -121,20 +120,6 @@ const Container = styled.main`
     justify-content: flex-start;
 
     background-color: white;
-
-    a {
-        margin-top: 25px;
-
-        font-family: Lexend Deca;
-        font-size: 14px;
-        font-style: normal;
-        font-weight: 400;
-        line-height: 17px;
-        letter-spacing: 0em;
-        text-align: center;
-
-        color: #52B6FF;
-    }
 `;
 
 const BigLogo = styled.div`
@@ -227,6 +212,35 @@ const Button = styled.button`
         (isLoading && `
             opacity: 0.7;
             pointer-events: none;
+        `)
+    };
+`;
+
+const StyledLink = styled(Link)`
+    text-decoration: none;
+
+    &:focus, &:visited, &:link, &:active {
+        text-decoration: none;
+    }
+
+    &:hover {
+        text-decoration: underline;
+    }
+
+    margin-top: 25px;
+    font-family: Lexend Deca;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 17px;
+    letter-spacing: 0em;
+    text-align: center;
+    color: #52B6FF;
+
+    ${({ isLoading }) =>
+        (isLoading && `
+            opacity: 0.7 !important;
+            pointer-events: none !important;
         `)
     };
 `;
