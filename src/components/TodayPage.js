@@ -16,6 +16,8 @@ export default function TodayPage() {
 
     const [todayTasks, setTodayTasks] = useState(null);
     const [habitsChecked, setHabitsChecked] = useState(0);
+    const [percentegeHabitsChecked, setPercentegeHabitsChecked] = useState(0);
+    
 
     const todayDate = dayjs().locale("pt-br").format("dddd, DD/MM");
 
@@ -24,6 +26,7 @@ export default function TodayPage() {
 
         promise.then((todayTasks) => {
             console.log(todayTasks.data);
+            console.log(todayTasks.data.length);
             setTodayTasks(todayTasks.data);
         });
 
@@ -38,7 +41,8 @@ export default function TodayPage() {
 
             checkPromise.then((reponse) => {
                 console.log(reponse);
-                setHabitsChecked(habitsChecked + 1);
+                setHabitsChecked(habitsChecked - 1);
+                setPercentegeHabitsChecked((habitsChecked)/todayTasks.length);
             });
 
             checkPromise.catch((error) => {
@@ -50,7 +54,8 @@ export default function TodayPage() {
 
             uncheckPromise.then((reponse) => {
                 console.log(reponse);
-                setHabitsChecked(habitsChecked - 1);
+                setHabitsChecked(habitsChecked + 1);
+                setPercentegeHabitsChecked((habitsChecked * 100)/todayTasks.length);
             });
 
             uncheckPromise.catch((error) => {
@@ -65,7 +70,12 @@ export default function TodayPage() {
             <Container>
                 <DateAndHabitsPercentage>
                     <h1>{todayDate}</h1>
-                    <h2>Nenhum hábito concluído ainda</h2>
+                    { habitsChecked === 0 ? (
+                        <h2>Nenhum hábito concluído ainda</h2>
+                        ) : (
+                        <h2>{percentegeHabitsChecked}% dos hábitos concluídos</h2>
+                        )
+                    }
                 </DateAndHabitsPercentage>
 
                 {todayTasks === null ? 
