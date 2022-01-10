@@ -81,6 +81,17 @@ function deleteHabit(token, id) {
   return promise;
 }
 
+function getHistoryDailyHabits(token) {
+  const promise = axios.get(`${BASE_URL}/habits/history/daily`,
+    {
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    }
+  );
+  return promise;
+}
+
 export {
   login,
   signUp,
@@ -89,5 +100,6 @@ export {
   checkHabit,
   uncheckHabit,
   createHabit,
-  deleteHabit
+  deleteHabit,
+  getHistoryDailyHabits
 };

@@ -1,8 +1,10 @@
 import { useState, useEffect, useContext } from "react";
 import styled from 'styled-components';
-import dayjs from "dayjs";
 import { Checkbox } from 'react-ionicons';
 import Loader from "react-loader-spinner";
+
+import dayjs from "dayjs";
+import 'dayjs/locale/pt-br';
 
 import { getTodayHabits, checkHabit, uncheckHabit } from '../services/API.js';
 import UserContext from "../contexts/UserContext";
