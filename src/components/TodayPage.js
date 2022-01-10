@@ -45,7 +45,6 @@ export default function TodayPage() {
             const checkPromise = uncheckHabit(user.token, task);
 
             checkPromise.then((reponse) => {
-                console.log(reponse);
                 setTasksDoneToday(tasksDoneToday - 1);
             });
 
@@ -57,7 +56,6 @@ export default function TodayPage() {
             const uncheckPromise = checkHabit(user.token, task)
 
             uncheckPromise.then((reponse) => {
-                console.log(reponse);
                 setTasksDoneToday(tasksDoneToday + 1);
             });
 

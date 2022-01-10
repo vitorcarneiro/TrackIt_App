@@ -1,4 +1,4 @@
-import { useState, useContext } from "react";
+import { useState, useContext, useEffect } from "react";
 import styled from 'styled-components';
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router";
@@ -18,7 +18,13 @@ export default function LoginPage() {
 
     const navigate = useNavigate();
 
-    const { setUser } = useContext(UserContext);
+    const { user, setAndPersistUser } = useContext(UserContext);
+
+    useEffect(() => {
+        if (user){
+         navigate("/hoje")   
+        }
+    },[navigate, user])
 
     function handleLogin(event) {
         event.preventDefault();
@@ -28,13 +34,17 @@ export default function LoginPage() {
             password: password
         }
 
+        startLogin(clientLogin);
+    };
+
+    function startLogin(clientLogin) {
         setIsLoading(true);
-        
+
         const promise = login(clientLogin);
 
         promise.then((clientData) => {
-            setUser(clientData.data);
-
+            setAndPersistUser(clientData.data);
+        
             navigate('/hoje');
         });
         
@@ -48,8 +58,7 @@ export default function LoginPage() {
 
             setIsLoading(false);
         });
-
-    }
+    };
 
     return (
         <Container>

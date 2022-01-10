@@ -81,23 +81,6 @@ function deleteHabit(token, id) {
   return promise;
 }
 
-
-
-// function habitsToday(booking) {
-//   const promise = axios.get(`${BASE_URL}/seats/book-many`, booking);
-//   return promise;
-// }
-
-// function habitDone(booking) {
-//   const promise = axios.post(`${BASE_URL}/seats/book-many`, booking);
-//   return promise;
-// }
-
-// function habitsHistory(booking) {
-//   const promise = axios.get(`${BASE_URL}/seats/book-many`, booking);
-//   return promise;
-// }
-
 export {
   login,
   signUp,

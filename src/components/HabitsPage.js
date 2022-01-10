@@ -26,10 +26,7 @@ export default function HabitPage() {
     useEffect(() => {
         const promise = getAllHabits(user);
 
-        console.log(user);
-
         promise.then((allHabits) => {
-            console.log(allHabits.data);
             setAllHabits(allHabits.data);
         });
 

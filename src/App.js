@@ -11,12 +11,19 @@ import HistoryPage from './components/HistoryPage.js';
 
 export default function App() {
 
-    const [user, setUser] = useState(null);
+    const userLocalStorage = JSON.parse(localStorage.getItem("user"));
+    const [user, setUser] = useState(userLocalStorage);
+
     const [allTodayTasks, setAllTodayTasks] = useState(0);
     const [tasksDoneToday, setTasksDoneToday] = useState(0);
 
+    function setAndPersistUser(user) {
+		setUser(user);
+		localStorage.setItem("user", JSON.stringify(user));
+	}
+
     return (
-        <UserContext.Provider value={{ user, setUser, allTodayTasks, setAllTodayTasks, tasksDoneToday, setTasksDoneToday }}>
+        <UserContext.Provider value={{ user, setUser, allTodayTasks, setAllTodayTasks, tasksDoneToday, setTasksDoneToday, userLocalStorage, setAndPersistUser }}>
             <BrowserRouter>
                     <Routes>
                         <Route path="/" element={ <LoginPage /> }></Route>
