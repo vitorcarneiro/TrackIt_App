@@ -1,6 +1,6 @@
 # TrackIt App
 
-Now, you are able to track your habits with this app, so let`s [TrackIt](https://trackit-vitor-carneiro.vercel.app/https://trackit-vitor-carneiro.vercel.app/).
+Now, you are able to track your habits with this app, so let`s [TrackIt](https://trackit-vitor-carneiro.vercel.app/).
 
 ## About
 
