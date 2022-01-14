@@ -19,3 +19,5 @@ And you can see on history page if you doing it right or not.
 - Add habit
 - Remove habit
 - Show calendar that shows days if you done all habits or not
+
+![example branch parameter](https://github.com/github/docs/actions/workflows/main.yml/badge.svg?branch=feature-1)
