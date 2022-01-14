@@ -48,7 +48,6 @@ The following tools and frameworks were used in the construction of the project:
   <img style='margin: 5px;' src='https://img.shields.io/badge/axios%20-%2320232a.svg?&style=flat&color=informational'>
   <img style='margin: 5px;' src="https://img.shields.io/badge/react_router%20-%2320232a.svg?&style=flat&logo=react&logoColor=%2361DAFB"/>
   <img style='margin: 5px;' src='https://img.shields.io/badge/react-ionicons%20-%2320232a.svg?&style=flat&color=f28dc7&logo=react-icons&logoColor=%2361DAFB'>
-  <img style='margin: 5px;' src='https://img.shields.io/badge/dayjs%20-%2320232a.svg?&style=flat&color=f28dc7&logo=react-icons&logoColor=%2361DAFB'>
 </p>
 
 ## How to run
