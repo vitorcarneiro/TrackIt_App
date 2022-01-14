@@ -20,4 +20,65 @@ And you can see on history page if you doing it right or not.
 - Remove habit
 - Show calendar that shows days if you done all habits or not
 
-![example branch parameter](https://github.com/github/docs/actions/workflows/main.yml/badge.svg?branch=feature-1)
+## Technologies
+The following tools and frameworks were used in the construction of the project:<br>
+<p>
+  <img style='margin: 5px;' src='https://img.shields.io/badge/styled-components%20-%2320232a.svg?&style=for-the-badge&color=b8679e&logo=styled-components&logoColor=%3a3a3a'>
+  <img style='margin: 5px;' src='https://img.shields.io/badge/axios%20-%2320232a.svg?&style=for-the-badge&color=informational'>
+  <img style='margin: 5px;' src="https://img.shields.io/badge/react-app%20-%2320232a.svg?&style=for-the-badge&color=60ddf9&logo=react&logoColor=%2361DAFB"/>
+  <img style='margin: 5px;' src="https://img.shields.io/badge/react_route%20-%2320232a.svg?&style=for-the-badge&logo=react&logoColor=%2361DAFB"/>
+  <img style='margin: 5px;' src='https://img.shields.io/badge/react-icons%20-%2320232a.svg?&style=for-the-badge&color=f28dc7&logo=react-icons&logoColor=%2361DAFB'>
+  <img style='margin: 5px;' src="https://img.shields.io/badge/react-input%20mask%20-%2320232a.svg?&style=for-the-badge&logo=react"/>
+  <img style='margin: 5px;' src="https://img.shields.io/badge/react-text%20mask%20-%2320232a.svg?&style=for-the-badge&logo=react"/>
+  <img style='margin: 5px;' src="https://img.shields.io/badge/text-mask%20addons%20-%2320232a.svg?&style=for-the-badge&logo=text-mask"/>
+</p>
+
+## How to run
+
+1. Clone this repository
+2. Follow instructions to run back-end at https://github.com/my-user/my-project-backend
+3. Install dependencies
+```bash
+npm i
+```
+4. Run this with
+```bash
+npm start
+```
+5. You can optionally build the project running
+```bash
+npm run build
+```
+6. Finally access http://localhost:3000 on your favorite browser (unless it is Internet Explorer. In this case, review your life decisions)
+## Technologies
+The following tools and frameworks were used in the construction of the project:<br>
+<p>
+  <img style='margin: 5px;' src='https://img.shields.io/badge/styled-components%20-%2320232a.svg?&style=for-the-badge&color=b8679e&logo=styled-components&logoColor=%3a3a3a'>
+  <img style='margin: 5px;' src='https://img.shields.io/badge/axios%20-%2320232a.svg?&style=for-the-badge&color=informational'>
+  <img style='margin: 5px;' src="https://img.shields.io/badge/react-app%20-%2320232a.svg?&style=for-the-badge&color=60ddf9&logo=react&logoColor=%2361DAFB"/>
+  <img style='margin: 5px;' src="https://img.shields.io/badge/react_route%20-%2320232a.svg?&style=for-the-badge&logo=react&logoColor=%2361DAFB"/>
+  <img style='margin: 5px;' src='https://img.shields.io/badge/react-icons%20-%2320232a.svg?&style=for-the-badge&color=f28dc7&logo=react-icons&logoColor=%2361DAFB'>
+  <img style='margin: 5px;' src="https://img.shields.io/badge/react-input%20mask%20-%2320232a.svg?&style=for-the-badge&logo=react"/>
+  <img style='margin: 5px;' src="https://img.shields.io/badge/react-text%20mask%20-%2320232a.svg?&style=for-the-badge&logo=react"/>
+  <img style='margin: 5px;' src="https://img.shields.io/badge/text-mask%20addons%20-%2320232a.svg?&style=for-the-badge&logo=text-mask"/>
+</p>
+
+[![wakatime](https://wakatime.com/badge/user/75b063fd-fc90-4981-92ec-8042466ed674/project/fb53cd2f-b2ff-4ca4-b453-ed5d62586c42.svg)](https://wakatime.com/badge/user/75b063fd-fc90-4981-92ec-8042466ed674/project/fb53cd2f-b2ff-4ca4-b453-ed5d62586c42)
+## How to run
+
+1. Clone this repository
+2. Clone the back-end repository at https://github.com/my-user/my-project-backend
+3. Follow instructions to run back-end at https://github.com/my-user/my-project-backend
+4. Install dependencies
+```bash
+npm i
+```
+5. Run the front-end with
+```bash
+npm start
+```
+6. You can optionally build the project running
+```bash
+npm run build
+```
+7. Finally access http://localhost:3000 on your favorite browser (unless it is Internet Explorer. In this case, review your life decisions)
