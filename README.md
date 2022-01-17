@@ -2,7 +2,7 @@
 
 Now, you are able to track your habits with this app, so let`s [TrackIt](https://trackit-vitor-carneiro.vercel.app/).
 
-<img src="/assets/trackit-usage.gif" />
+<img src="./src/assets/trackit-usage.gif" />
 
 ## About
 
