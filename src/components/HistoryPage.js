@@ -46,9 +46,6 @@ export default function HistoryPage() {
     
     function checkDay(date) {
         const day = `${("0" + date.getDate()).slice(-2)}/${("0" + (date.getMonth() + 1)).slice(-2)}/${date.getFullYear()}`;
-
-        //console.log(day);
-        //console.log(daysWithHabits.includes(day));
         
         return daysWithHabits.includes(day);    
     }
@@ -126,23 +123,75 @@ const Container = styled.main`
 
     }
 
-    .react-calendar__tile {
-        width: 25px;
-        height: 45px;
+    .react-calendar__month-view__weekNumbers .react-calendar__tile {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.75em;
+      font-weight: bold;
+      padding: calc(0.75em / 0.75) calc(0.5em / 0.75);
     }
+
+    .react-calendar__month-view__days__day {
+      font-size: 0.9em;
+    }
+
+    .react-calendar__tile {
+      width: 45px !important;
+      height: 45px !important;
+      text-align: center;
+      padding: 0.75em 0.5em;
+      background: none;
+    }
+    
+    .react-calendar__tile--now {
+      background: #ffff76 !important;
+      &::after {
+        content: "";
+        background-color: transparent !important;
+      }
+    }  
+
+    .react-calendar__tile--active {
+    background: #1087ff !important;
+    color: #000 !important;
+    }
+
 
     .day-completed {
-        background-color: #8FC549;
-        border-radius: 50%;
-        width: 15px;
-        height: 40px;
+        position: relative;
+        background: transparent;
+        z-index: 2;
+
+        &::after {
+            content: "";
+            position: absolute;
+            width: 2.5em;
+            height: 2.5em;
+            left: 0.38em;
+            top: 0.35em;
+            border-radius:100%;
+            background-color: #8FC549;
+            z-index: -1; 
+        }
     }
 
-    .day-uncompleted {
-        background-color: #E75766;
-        border-radius: 50%;
-        width: 15px;
-        height: 40px;
+    .day-uncompleted{
+        position: relative;
+        background: transparent;
+        z-index: 2;
+
+        &::after {
+            content: "";
+            position: absolute;
+            width: 2.5em;
+            height: 2.5em;
+            left: 0.38em;
+            top: 0.35em;
+            border-radius:100%;
+            background-color: #E75766;;
+            z-index: -1; 
+        }
     }
 `;
 
